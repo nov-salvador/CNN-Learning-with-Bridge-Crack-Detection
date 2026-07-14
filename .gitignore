@@ -1,0 +1,26 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Model weights
+models/*.pth
+models/*.pt
+
+# Dataset
+data/raw/
+data/processed/
+
+# VS Code
+.vscode/
+
+# Logs
+outputs/logs/
+
+# macOS
+.DS_Store
