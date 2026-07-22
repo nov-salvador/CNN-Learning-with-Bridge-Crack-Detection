@@ -40,11 +40,16 @@ The goal is not only to build an accurate model but also to understand how CNNs 
 ```text
 Bridge-Crack-Detection-CNN/
 │
-├── notebooks/        # CNN experiments
-├── datasets/           # Dataset information
-├── models/             # CNN architectures
-├── src/                # Source code
-├── outputs/            # Results and trained models
+├── .venv/                  # Python virtual environment
+├── app/                    # Application or inference scripts
+├── data/                   # Dataset and data processing
+├── notebooks/              # Lesson notebooks and experiments
+├── outputs/                # Trained models, plots, and results
+├── src/
+│   └── models/             # CNN model implementations
+│
+├── requirements.txt        # Project dependencies
+├── .gitignore
 └── README.md
 ```
 
