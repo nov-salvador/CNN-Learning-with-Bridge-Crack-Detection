@@ -5,7 +5,7 @@ class SimpleCNN(nn.Module):
   def __init__(self):
     super().__init__()
 
-    self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
+    self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
 
     self.relu = nn.ReLU()
 
@@ -13,7 +13,7 @@ class SimpleCNN(nn.Module):
 
     self.flatten = nn.Flatten()
 
-    self.fc = nn.Linear(16 * 16 * 16, 10 )
+    self.fc = nn.LazyLinear(2)
 
   def forward(self, x):
     x = self.conv1(x)
