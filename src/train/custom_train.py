@@ -3,8 +3,8 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision.models import resnet18, ResNet18_Weights
 
-from dataset import BridgeCrackDataset
-from models.model import SimpleCNN
+from src.dataset.custom_dataset import BridgeCrackDataset
+from models.custom_model import SimpleCNN
 
 #Configuration
 TRAIN_DIR = "data/processed/train"
