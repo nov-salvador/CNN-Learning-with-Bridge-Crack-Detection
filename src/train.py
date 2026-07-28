@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from torchvision.models import resnet18, ResNet18_Weights
 
 from dataset import BridgeCrackDataset
 from models.model import SimpleCNN
@@ -25,13 +26,24 @@ val_dataset = BridgeCrackDataset(root_dir=VAL_DIR)
 val_loader = DataLoader(dataset=val_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
 #Model
-model = SimpleCNN().to(device=device)
+# model = SimpleCNN().to(device=device) # used for scratch
+model = resnet18(weights=ResNet18_Weights.DEFAULT)
+model.fc = nn.Linear(512, 2)
+
+#Freeze the backbone
+for param in model.parameters():
+  param.requires_grad = False
+
+#Unfreeze the FC 
+for param in model.fc.parameters():
+  param.requires_grad = True
 
 #Loss
 criterion = nn.CrossEntropyLoss()
 
 #Optimizer and LR scheduler
-optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+# optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE) #used in scratch model
+optimizer = torch.optim.Adam(model.fc.parameters(), lr= LEARNING_RATE) 
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer=optimizer, step_size=5, gamma=0.1)
 
 #Training
@@ -83,18 +95,20 @@ for epoch in range(EPOCHS):
     best_val_loss = avg_val_loss
     counter = 0
 
-    torch.save({
-      "epoch": epoch,
-      "model_state_dict": model.state_dict(),
-      "optimizer_state_dict": optimizer.state_dict(),
-      "best_val_loss": best_val_loss
-    }, "checkpoints/best_model.pth")
+    torch.save(model.state_dict(), "checkpoints/best_model.pth")
 
   else:
     counter += 1
 
   scheduler.step()
-
+  checkpoints = {
+    "epoch": epoch,
+    "model_state_dict": model.state_dict(),
+    "optimizer_state_dict": optimizer.state_dict(),
+    "scheduler_state_dict": scheduler.state_dict(),
+    "best_val_loss": best_val_loss
+  }
+  torch.save(checkpoints, "checkpoints/last_checkpoint.pth")
   print(
     f"Epoch [{epoch+1}/{EPOCHS}] "
     f"Learning Rate [{optimizer.param_groups[0]['lr']}]"
@@ -106,4 +120,4 @@ for epoch in range(EPOCHS):
 
   if counter >= patience:
     print("Early Stopping")
-    break
+    break 
