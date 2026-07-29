@@ -47,3 +47,15 @@ def get_val_loader():
     pin_memory=True
   )
   return val_loader
+
+def get_test_loader():
+  test_dataset = datasets.ImageFolder(root=TEST_DIR, transform=val_transform)
+
+  test_loader = DataLoader(
+    test_dataset,
+    batch_size=BATCH_SIZE,
+    shuffle=False,
+    num_workers=4,
+    pin_memory=True
+  )
+  return test_loader

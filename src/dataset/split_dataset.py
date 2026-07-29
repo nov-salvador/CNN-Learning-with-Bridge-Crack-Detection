@@ -14,7 +14,8 @@ random.seed(42)
 
 #Spiliting
 def split_class(source_dir, class_name):
-  image_paths = list(source_dir.glob("*.jpg"))
+  for extension in ("*.jpg", "*.jpeg", "*.png"):
+    image_paths = list(source_dir.glob(extension))
 
   random.shuffle(image_paths)
 
@@ -39,7 +40,8 @@ def split_class(source_dir, class_name):
 #main
 if OUTPUT_DIR.exists():
   shutil.rmtree(OUTPUT_DIR)
-split_class(SOURCE_DIR / "Positive")
-split_class(SOURCE_DIR / "Negative")
+  
+split_class(SOURCE_DIR / "crack")
+split_class(SOURCE_DIR / "no_crack")
 
 print("Dataset split completed")
