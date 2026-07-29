@@ -18,7 +18,8 @@ def main():
 
   model = get_model().to(DEVICE)
 
-  criterion = nn.CrossEntropyLoss()
+  class_weights =  CRITERION_WEIGHTS.to(DEVICE)
+  criterion = nn.CrossEntropyLoss(class_weights)
   optimizer = optim.Adam(
     filter(lambda p: p.requires_grad, model.parameters()), 
     lr=LEARNING_RATE
