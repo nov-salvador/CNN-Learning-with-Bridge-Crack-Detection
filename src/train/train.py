@@ -41,7 +41,8 @@ def main():
       model=model,
       optimizer=optimizer,
       scheduler=scheduler,
-      checkpoint_dir= CHECKPOINT_DIR / "last_checkpoint.pth"
+      checkpoint_dir= CHECKPOINT_DIR / "last_checkpoint.pth",
+      device=DEVICE
     )
   else:
     start_epoch = 0 

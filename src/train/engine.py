@@ -1,5 +1,5 @@
 import torch
-import tqdm
+from tqdm import tqdm
 
 from sklearn.metrics import (
   accuracy_score, 
@@ -52,10 +52,10 @@ def val_one_epoch(model, val_loader, criterion, device):
   val_correct = 0
   val_total = 0
 
-  val_loader_tqdm = tqdm(val_loader, desc="Train")
+  val_loader_tqdm = tqdm(val_loader, desc="Val")
 
   with torch.no_grad():
-    for batch_idx , (images, labels) in enumerate(val_loader, start=1):
+    for batch_idx , (images, labels) in enumerate(val_loader_tqdm, start=1):
       images = images.to(device)
       labels = labels.to(device)
 
