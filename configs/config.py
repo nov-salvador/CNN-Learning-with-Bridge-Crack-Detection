@@ -14,6 +14,13 @@ SAMPLE_DIR_3 = DATA_DIR / "sample/sample_3.jpg"
 SAMPLE_DIR_4 = DATA_DIR / "sample/sample_4.jpg"
 SAMPLE_DIR_5 = DATA_DIR / "sample/sample_5.jpg"
 
+#Dataset
+TRAIN_RATIO = 0.7
+VAL_RATIO = 0.15
+TEST_RATIO = 0.15
+SOURCE_DIR = DATA_DIR / "raw"
+IMAGE_OUTPUT_DIR = DATA_DIR / "processed"
+
 #Image Size
 IMAGE_SIZE = 224
 

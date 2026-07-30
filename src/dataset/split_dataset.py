@@ -2,20 +2,15 @@ from pathlib import Path
 import random
 import shutil
 
-#Configuration
-SOURCE_DIR = Path("data/raw")
-OUTPUT_DIR = Path("data/processed")
-
-TRAIN_RATIO = 0.7
-VAL_RATIO = 0.15
-TEST_RATIO = 0.15
+from configs.config import *
 
 random.seed(42)
 
 #Spiliting
 def split_class(source_dir, class_name):
+  image_paths = []
   for extension in ("*.jpg", "*.jpeg", "*.png"):
-    image_paths = list(source_dir.glob(extension))
+    image_paths.extend(source_dir.glob(extension))
 
   random.shuffle(image_paths)
 
@@ -31,17 +26,17 @@ def split_class(source_dir, class_name):
     ("val", val_images),
     ("test", test_images),
   ]:
-    destination = OUTPUT_DIR / split_name / class_name
+    destination = IMAGE_OUTPUT_DIR / split_name / class_name
     destination.mkdir(parents=True, exist_ok=True)
-
+    
     for image_path in image_list:
       shutil.copy2(image_path, destination)
 
 #main
-if OUTPUT_DIR.exists():
-  shutil.rmtree(OUTPUT_DIR)
+if IMAGE_OUTPUT_DIR.exists():
+  shutil.rmtree(IMAGE_OUTPUT_DIR)
   
-split_class(SOURCE_DIR / "crack")
-split_class(SOURCE_DIR / "no_crack")
+split_class(SOURCE_DIR / "crack", "crack")
+split_class(SOURCE_DIR / "no_crack", "no_crack")
 
 print("Dataset split completed")
