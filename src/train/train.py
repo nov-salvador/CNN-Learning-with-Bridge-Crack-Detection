@@ -44,9 +44,11 @@ def main():
       checkpoint_dir= CHECKPOINT_DIR / "last_checkpoint.pth",
       device=DEVICE
     )
+    print(f"Resuming training in epoch:{start_epoch}")
   else:
     start_epoch = 0 
     best_val_loss = float('inf')
+    print(f"Starting training in epoch:{start_epoch}")
 
   for epoch in range(start_epoch, EPOCHS):
 
