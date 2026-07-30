@@ -1,4 +1,6 @@
 import torch
+import tqdm
+
 from sklearn.metrics import (
   accuracy_score, 
   precision_score, 
@@ -14,7 +16,9 @@ def train_one_epoch(model, train_loader, criterion, optimizer, device):
   train_correct = 0
   train_total = 0
 
-  for images, labels in train_loader:
+  train_loader_tqdm = tqdm(train_loader, desc="Train")
+
+  for batch_idx, (images, labels) in enumerate(train_loader_tqdm, start=1):
     images = images.to(device)
     labels = labels.to(device)
 
@@ -29,6 +33,14 @@ def train_one_epoch(model, train_loader, criterion, optimizer, device):
     train_correct += (predicted == labels).sum().item()
     train_total += labels.size(0) 
 
+    train_loss_tqdm = train_loss / batch_idx
+    train_accuracy_tqdm = 100 * train_correct/train_total
+
+    train_loader_tqdm.set_postfix(
+        loss=f"{train_loss_tqdm:.4f}",
+        acc=f"{train_accuracy_tqdm:.2f}%"
+    )
+
   avg_train_loss = train_loss / len(train_loader)
   train_accuracy = 100 * train_correct/train_total
 
@@ -40,8 +52,10 @@ def val_one_epoch(model, val_loader, criterion, device):
   val_correct = 0
   val_total = 0
 
+  val_loader_tqdm = tqdm(val_loader, desc="Train")
+
   with torch.no_grad():
-    for images, labels in val_loader:
+    for batch_idx , (images, labels) in enumerate(val_loader, start=1):
       images = images.to(device)
       labels = labels.to(device)
 
@@ -52,6 +66,14 @@ def val_one_epoch(model, val_loader, criterion, device):
       _, predicted = outputs.max(1)
       val_correct += (predicted == labels).sum().item()
       val_total += labels.size(0)
+
+      val_loss_tqdm = val_loss / batch_idx
+      val_accuracy_tqdm = 100 * val_correct/val_total
+  
+      val_loader_tqdm.set_postfix(
+          loss=f"{val_loss_tqdm:.4f}",
+          acc=f"{val_accuracy_tqdm:.2f}%"
+      )
 
   avg_val_loss = val_loss / len(val_loader)
   val_accuracy = 100 * val_correct/val_total
