@@ -18,9 +18,10 @@ def main():
 
   best_model_state = torch.load(CHECKPOINT_DIR / "best_model.pth", map_location=DEVICE)
 
-  model.load_state_dict(best_model_state['model_state_dict'])
+  model.load_state_dict(best_model_state)
 
-  criterion = nn.CrossEntropyLoss()
+  class_weights =  CRITERION_WEIGHTS.to(DEVICE)
+  criterion = nn.CrossEntropyLoss(weight=class_weights)
 
   metrics = test_one_epoch(
     model=model,
@@ -28,14 +29,19 @@ def main():
     criterion=criterion,
     device=DEVICE
   )
-
+  print("=" * 40)
+  print("Test Results")
+  print("=" * 40)
+  
   print(f"Accuracy : {metrics['accuracy']:.4f}")
   print(f"Precision: {metrics['precision']:.4f}")
   print(f"Recall   : {metrics['recall']:.4f}")
   print(f"F1 Score : {metrics['f1']:.4f}")
-
+  print(f"Loss     : {metrics['loss']:.4f}")
   print("\nConfusion Matrix")
   print(metrics["cm"])
+
+  print(metrics['classification_report'])
 
 if __name__ == "__main__":
   main()

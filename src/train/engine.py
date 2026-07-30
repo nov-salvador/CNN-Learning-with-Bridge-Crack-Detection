@@ -1,5 +1,5 @@
 import torch
-from tqdm import tqdm
+from tqdm.auto import tqdm
 
 from sklearn.metrics import (
   accuracy_score, 
@@ -84,10 +84,15 @@ def test_one_epoch(model, test_loader, criterion, device):
 
   all_labels = []
   all_predictions = []
+
+  test_correct = 0
+  test_total = 0
   test_loss = 0
 
+  test_loader_tqdm = tqdm(test_loader, desc="Test")
+
   with torch.no_grad():
-    for images, labels in test_loader:
+    for batch_idx , (images, labels) in enumerate(test_loader_tqdm, start=1):
       images = images.to(device)
       labels = labels.to(device)
 
@@ -96,17 +101,29 @@ def test_one_epoch(model, test_loader, criterion, device):
 
       test_loss += loss.item()
       _, predicted = outputs.max(1)
-      avg_test_loss = test_loss / len(test_loader)
+      test_correct += (predicted == labels).sum().item()
+      test_total += labels.size(0)
+
+      test_loss_tqdm = test_loss / batch_idx
+      test_accuracy_tqdm = 100 * test_correct/test_total
+      
       all_labels.extend(labels.cpu().numpy())
       all_predictions.extend(predicted.cpu().numpy())
+
+      test_loader_tqdm.set_postfix(
+        loss=f"{test_loss_tqdm:.4f}",
+        acc=f"{test_accuracy_tqdm:.2f}%"
+      )
+  avg_test_loss = test_loss / len(test_loader)
 
   metrics = {
     "loss": avg_test_loss,
     "accuracy": accuracy_score(all_labels, all_predictions),
-    "precision": precision_score(all_labels, all_predictions),
-    "recall": recall_score(all_labels, all_predictions),
-    "f1": f1_score(all_labels, all_predictions),
-    "cm": confusion_matrix(all_labels, all_predictions)
+    "precision": precision_score(all_labels, all_predictions, zero_division=0),
+    "recall": recall_score(all_labels, all_predictions, zero_division=0),
+    "f1": f1_score(all_labels, all_predictions, zero_division=0),
+    "cm": confusion_matrix(all_labels, all_predictions),
+    "classification_report": classification_report(all_labels, all_predictions, target_names=["crack", "no_crack"])
   }
 
   return metrics
