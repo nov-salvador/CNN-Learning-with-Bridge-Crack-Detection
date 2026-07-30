@@ -13,6 +13,9 @@ from src.utils.checkpoint import save_best_model, save_checkpoint, load_checkpoi
 from src.utils.logger import TrainingLogger
 
 def main():
+
+  CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
+
   train_loader = get_train_loader()
   val_loader = get_val_loader()
 
@@ -28,13 +31,13 @@ def main():
     optimizer=optimizer,
     mode='min',
     factor=0.1,
-    patience=3
+    patience=2
   )
 
   logger = TrainingLogger()
 
   counter = 0
-  patience = 3
+  patience = 5
 
   if RESUME_TRAINING:
     start_epoch, best_val_loss = load_checkpoint(

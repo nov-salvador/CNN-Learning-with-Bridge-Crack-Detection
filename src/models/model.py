@@ -8,6 +8,9 @@ def get_model():
   for params in model.parameters():
     params.requires_grad = False
 
+  for params in model.layer4.parameters():
+    params.requires_grad = True
+    
   num_in_feature = model.fc.in_features
 
   model.fc = nn.Linear(num_in_feature, NUM_CLASSES)

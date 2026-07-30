@@ -26,13 +26,14 @@ IMAGE_SIZE = 224
 
 #Training
 BATCH_SIZE = 32
-LEARNING_RATE = 0.001
-EPOCHS = 10
-CRITERION_WEIGHTS = torch.tensor([1.87, 0.68])
-RESUME_TRAINING = True
+LEARNING_RATE = 0.0001
+EPOCHS = 15
+CRITERION_WEIGHTS = torch.tensor([1.88, 0.68])
+RESUME_TRAINING = False
 
 #Model
 NUM_CLASSES = 2
+MODEL_NAME = "model_2"
 
 #Device
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -43,9 +44,9 @@ PREDICTION_DIR = OUTPUT_DIR / "predictions"
 GRADCAM_DIR = OUTPUT_DIR / "gradcam"
 
 #Checkpoint
-CHECKPOINT_DIR = BASE_DIR / "checkpoints"
+CHECKPOINT_DIR = BASE_DIR / "checkpoints" / MODEL_NAME
 
 #Logs
-LOG_DIR = BASE_DIR / "logs"
+LOG_DIR = BASE_DIR / "logs" / MODEL_NAME
 CSV_LOG_FILE = LOG_DIR / "training_log.csv"
-TENSORBOARD_DIR = LOG_DIR / "tensorboard"
+TENSORBOARD_DIR = LOG_DIR / "tensorboard" / MODEL_NAME
