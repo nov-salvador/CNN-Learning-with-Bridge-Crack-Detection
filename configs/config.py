@@ -49,4 +49,4 @@ CHECKPOINT_DIR = BASE_DIR / "checkpoints" / MODEL_NAME
 #Logs
 LOG_DIR = BASE_DIR / "logs" / MODEL_NAME
 CSV_LOG_FILE = LOG_DIR / "training_log.csv"
-TENSORBOARD_DIR = LOG_DIR / "tensorboard" / MODEL_NAME
+TENSORBOARD_DIR = LOG_DIR / "tensorboard"
