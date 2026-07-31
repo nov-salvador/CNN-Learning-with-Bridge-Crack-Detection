@@ -2,6 +2,7 @@ import mlflow
 
 class MLflowLogger():
   def __init__(self, experiment_name: str):
+    print("Tracking URI:", mlflow.get_tracking_uri())
     mlflow.set_experiment(experiment_name=experiment_name)
 
   def start_run(self, run_name=None):

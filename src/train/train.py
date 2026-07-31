@@ -152,9 +152,9 @@ def main():
         "best_epoch": best_epoch
       })
 
-      mlflow_logger.log_artifact(CSV_LOG_FILE)
-      mlflow_logger.log_artifact(CHECKPOINT_DIR / "best_model.pth")
-      mlflow_logger.log_artifact(CHECKPOINT_DIR / "last_checkpoint.pth")
+      mlflow_logger.log_artifacts(CSV_LOG_FILE)
+      mlflow_logger.log_artifacts(CHECKPOINT_DIR / "best_model.pth")
+      mlflow_logger.log_artifacts(CHECKPOINT_DIR / "last_checkpoint.pth")
       mlflow_logger.end_run()
 
 if __name__ == "__main__":
