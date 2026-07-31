@@ -16,8 +16,8 @@ class MLflowLogger():
   def log_metrics(self, metrics: dict, step=None):
     mlflow.log_metrics(metrics=metrics, step=step)
 
-  def log_artifacts(self, path):
-    mlflow.log_artifacts(path)
+  def log_artifact(self, path):
+    mlflow.log_artifact(str(path))
 
   def end_run(self):
     mlflow.end_run()
