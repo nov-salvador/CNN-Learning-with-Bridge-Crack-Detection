@@ -39,7 +39,6 @@ def main():
   if ENABLE_MLFLOW:
     mlflow_logger = MLflowLogger(MLFLOW_EXPERIMENT_NAME)
     mlflow_logger.start_run(MODEL_NAME)
-
     mlflow_logger.log_params({
       "model": MODEL_NAME,
       "batch_size": BATCH_SIZE,

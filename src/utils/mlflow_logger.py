@@ -1,7 +1,9 @@
 import mlflow
+from configs.config import *
 
 class MLflowLogger():
   def __init__(self, experiment_name: str):
+    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     print("Tracking URI:", mlflow.get_tracking_uri())
     mlflow.set_experiment(experiment_name=experiment_name)
 

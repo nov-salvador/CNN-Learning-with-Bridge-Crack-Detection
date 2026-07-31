@@ -54,3 +54,4 @@ TENSORBOARD_DIR = LOG_DIR / "tensorboard"
 #MlFlow
 MLFLOW_EXPERIMENT_NAME = "Bridge Crack Detection"
 ENABLE_MLFLOW = True
+MLFLOW_TRACKING_URI = f"sqlite:///{(BASE_DIR / 'mlflow.db').as_posix()}"
