@@ -34,6 +34,5 @@ def add_class(source_dir, class_name):
 
 #main
 add_class(SOURCE_DIR_ADDITIONAL, "crack")
-add_class(SOURCE_DIR_ADDITIONAL, "no_crack")
 
 print("Dataset addition completed")
