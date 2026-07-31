@@ -50,3 +50,7 @@ CHECKPOINT_DIR = BASE_DIR / "checkpoints" / MODEL_NAME
 LOG_DIR = BASE_DIR / "logs" / MODEL_NAME
 CSV_LOG_FILE = LOG_DIR / "training_log.csv"
 TENSORBOARD_DIR = LOG_DIR / "tensorboard"
+
+#MlFlow
+MLFLOW_EXPERIMENT_NAME = "Bridge Crack Detection"
+ENABLE_MLFLOW = True
