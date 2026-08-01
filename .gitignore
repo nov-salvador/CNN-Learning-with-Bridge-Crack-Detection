@@ -24,3 +24,6 @@ outputs/logs/
 
 # macOS
 .DS_Store
+
+#Checkpoint
+last_checkpoint.pth
