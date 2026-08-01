@@ -1,8 +1,7 @@
 import torch
-from torch.utils.data import DataLoader
 import torch.nn as nn
 
-from pathlib import Path
+from src.utils.test_logger import TestLogger
 
 
 from src.dataset.dataset import get_test_loader
@@ -29,6 +28,13 @@ def main():
     criterion=criterion,
     device=DEVICE
   )
+
+  logger = TestLogger()
+
+  logger.log(metrics)
+  logger.log_conf_matrix(metrics["cm"])
+  logger.log_classification_report(metrics["classification_report"])
+
   print("=" * 40)
   print("Test Results")
   print("=" * 40)

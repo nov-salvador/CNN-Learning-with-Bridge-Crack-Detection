@@ -46,6 +46,10 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 OUTPUT_DIR = BASE_DIR / "outputs"
 PREDICTION_DIR = OUTPUT_DIR / "predictions"
 GRADCAM_DIR = OUTPUT_DIR / "gradcam"
+TEST_OUTPUT = OUTPUT_DIR / "test_results" / MODEL_NAME
+TEST_CSV_FILE = TEST_OUTPUT / "test_results.csv"
+TEST_CONF_MATRIX = TEST_OUTPUT / "test_confusion_matrix.png"
+TEST_CLASSIFICATION_REPORT = TEST_OUTPUT / "classification_report.txt"
 
 #Checkpoint
 CHECKPOINT_DIR = BASE_DIR / "checkpoints" / MODEL_NAME

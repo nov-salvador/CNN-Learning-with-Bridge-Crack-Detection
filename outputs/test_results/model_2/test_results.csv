@@ -1,0 +1,2 @@
+Model Name,Accuracy,Precision,Recall,F1 Score,Loss
+model_2,0.8360,0.8347,0.9082,0.8699,0.4223
