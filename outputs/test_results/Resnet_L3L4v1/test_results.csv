@@ -1,0 +1,2 @@
+Model Name,Accuracy,Precision,Recall,F1 Score,Loss
+Resnet_L3L4v1,0.9180,0.9047,0.9659,0.9343,0.2257

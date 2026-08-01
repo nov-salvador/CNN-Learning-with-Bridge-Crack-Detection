@@ -8,6 +8,9 @@ def get_model():
   for params in model.parameters():
     params.requires_grad = False
 
+  for params in model.layer3.parameters():
+    params.requires_grad = True
+
   for params in model.layer4.parameters():
     params.requires_grad = True
     

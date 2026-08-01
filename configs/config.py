@@ -37,7 +37,7 @@ RESUME_TRAINING = False
 
 #Model
 NUM_CLASSES = 2
-MODEL_NAME = "model_2"
+MODEL_NAME = "Resnet_L3L4v1"
 
 #Device
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
