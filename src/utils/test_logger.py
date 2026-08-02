@@ -1,5 +1,7 @@
 import csv
 
+from torch.utils.tensorboard import SummaryWriter
+
 from configs.config import *
 
 import matplotlib.pyplot as plt
@@ -19,6 +21,8 @@ class TestLogger():
           "Loss",
         ])
 
+    self.tensorboard_writer = SummaryWriter(log_dir=TEST_TENSORBOARD)
+
   def log(self, metrics):
     with open(TEST_CSV_FILE, "a", newline="") as file:
         writer = csv.writer(file)
@@ -30,6 +34,12 @@ class TestLogger():
           f"{metrics["f1"]:.4f}",
           f"{metrics["loss"]:.4f}",
           ])
+        
+    self.tensorboard_writer.add_scalar("test_accuracy", f"{metrics["accuracy"]:.4f}")
+    self.tensorboard_writer.add_scalar("test_precision", f"{metrics["precision"]:.4f}")
+    self.tensorboard_writer.add_scalar("test_recall", f"{metrics["recall"]:.4f}")
+    self.tensorboard_writer.add_scalar("test_f1_score", f"{metrics["f1"]:.4f}")
+    self.tensorboard_writer.add_scalar("test_loss", f"{metrics["loss"]:.4f}")
 
   def log_classification_report(self, report):
     with open(TEST_CLASSIFICATION_REPORT, "w") as f:

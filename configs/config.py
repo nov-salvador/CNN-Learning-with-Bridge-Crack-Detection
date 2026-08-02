@@ -50,6 +50,7 @@ TEST_OUTPUT = OUTPUT_DIR / "test_results" / MODEL_NAME
 TEST_CSV_FILE = TEST_OUTPUT / "test_results.csv"
 TEST_CONF_MATRIX = TEST_OUTPUT / "test_confusion_matrix.png"
 TEST_CLASSIFICATION_REPORT = TEST_OUTPUT / "classification_report.txt"
+TEST_TENSORBOARD = TEST_OUTPUT / "tensorboard"
 
 #Checkpoint
 CHECKPOINT_DIR = BASE_DIR / "checkpoints" / MODEL_NAME
