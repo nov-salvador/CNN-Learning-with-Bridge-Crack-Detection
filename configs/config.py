@@ -32,12 +32,12 @@ IMAGE_SIZE = 224
 BATCH_SIZE = 32
 LEARNING_RATE = 0.0001
 EPOCHS = 15
-CRITERION_WEIGHTS = torch.tensor([1.27, 0.82])
+CRITERION_WEIGHTS = torch.tensor([1.3, 0.82])
 RESUME_TRAINING = False
 
 #Model
 NUM_CLASSES = 2
-MODEL_NAME = "Resnet_L3L4v1"
+MODEL_NAME = "Resnet_L2L3L4v1"
 
 #Device
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
