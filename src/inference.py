@@ -23,7 +23,11 @@ def predict_image(model, image_path, class_names):
       probabilities,
       dim=1
     )
-    return (class_names[predicted.item()], confidence.item())
+    return {
+      "prediction" : class_names[predicted.item()], 
+      "confidence": confidence.item(),
+      "probabilities": probabilities.squeeze().cpu()
+    }
 
 def main():
   CLASS_NAMES = {
@@ -34,19 +38,23 @@ def main():
 
   checkpoint = torch.load(CHECKPOINT_DIR / "best_model.pth", map_location=DEVICE)
 
-  model.load_state_dict(checkpoint["model_state_dict"])
+  model.load_state_dict(checkpoint)
 
-  image_path = SAMPLE_DIR_1
+  image_path = SAMPLE_DIR_5
 
+  if not image_path.exists():
+    raise FileNotFoundError(f"{image_path} not found")
 
-  prediction, confidence = predict_image(
+  print(f"Predicting using {MODEL_NAME} on image {image_path}") 
+  
+  result= predict_image(
     model=model,
     image_path=image_path,
     class_names=CLASS_NAMES
   )
 
-  print(f"Prediction : {prediction}")
-  print(f"Confidence : {confidence * 100:.2f}%")
+  print(f"Prediction : {result['prediction']}")
+  print(f"Confidence : {result['confidence'] * 100:.2f}%")
 
 if __name__ == "__main__":
   main()

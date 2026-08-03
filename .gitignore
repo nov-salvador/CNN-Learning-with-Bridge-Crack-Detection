@@ -15,6 +15,7 @@ models/*.pt
 # Dataset
 data/raw/
 data/processed/
+data/sample
 
 # VS Code
 .vscode/
