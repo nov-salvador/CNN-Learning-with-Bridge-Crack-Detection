@@ -19,6 +19,8 @@ class TestLogger():
           "Recall",   
           "F1 Score", 
           "Loss",
+          "Crack Weight",
+          "No Crack Weight"
         ])
 
     self.tensorboard_writer = SummaryWriter(log_dir=TEST_TENSORBOARD)
@@ -33,6 +35,8 @@ class TestLogger():
           f"{metrics["recall"]:.4f}",
           f"{metrics["f1"]:.4f}",
           f"{metrics["loss"]:.4f}",
+          f"{CRITERION_WEIGHTS[0].item():.4f}",
+          f"{CRITERION_WEIGHTS[1].item():.4f}"
           ])
         
     self.tensorboard_writer.add_scalar("test_accuracy", f"{metrics["accuracy"]:.4f}")
