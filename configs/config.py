@@ -24,6 +24,10 @@ SOURCE_DIR_ADDITIONAL = SOURCE_DIR / "Image_crack"
 TOTAL_SAMPLE = 29085
 TOTAL_CRACK = 13040
 TOTAL_NO_CRACK = 16045
+CLASS_NAMES = {
+    0: "crack",
+    1: "no_crack"
+}
 
 #Image Size
 IMAGE_SIZE = 224
