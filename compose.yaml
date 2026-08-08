@@ -1,0 +1,35 @@
+services:
+  mlflow:
+    build: .
+    image: bridge-crack:latest
+    container_name: bridge-crack-mlflow
+
+    working_dir: /app
+
+    volumes:
+      - ./mlruns:/app/mlruns
+
+    ports:
+      - "5000:5000"
+
+    command: >
+      mlflow ui
+
+  tensorboard:
+    build: .
+    image: bridge-crack:latest
+    container_name: bridge-crack-tensorboard
+
+    working_dir: /app
+
+    volumes:
+      - ./logs:/app/logs
+
+    ports:
+      - "6006:6006"
+
+    command: >
+      tensorboard
+      --logdir /app/logs
+      --host 0.0.0.0
+      --port 6006

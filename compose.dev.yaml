@@ -1,0 +1,71 @@
+services:
+  trainer:
+    build: .
+    image: bridge-crack:latest
+    container_name: bridge-crack-dev
+    shm_size: "2gb"
+    volumes:
+      - ./src:/app/src
+      - ./configs:/app/configs
+      - ./data:/app/data
+      - ./checkpoints:/app/checkpoints
+      - ./outputs:/app/outputs
+      - ./mlruns:/app/mlruns
+
+    working_dir: /app
+
+    command: python -m src.train.train
+
+  mlflow:
+    build: .
+    image: bridge-crack:latest
+    container_name: bridge-crack-mlflow
+
+    working_dir: /app
+
+    volumes:
+      - ./mlruns:/app/mlruns
+
+    ports:
+      - "5000:5000"
+
+    command: >
+      mlflow ui
+      --host 0.0.0.0
+      --port 5000
+
+  tensorboard:
+    build: .
+    image: bridge-crack:latest
+    container_name: bridge-crack-tensorboard
+
+    working_dir: /app
+
+    volumes:
+      - ./logs:/app/logs
+
+    ports:
+      - "6006:6006"
+
+    command: >
+      tensorboard
+      --logdir /app/logs
+      --port 6006
+
+  api:
+    build: .
+    image: bridge-crack:latest
+    container_name: bridge-crack-api
+
+    working_dir: /app
+
+    volumes:
+      - ./app:/app/app
+      - ./src:/app/src
+      - ./configs:/app/configs
+      - ./checkpoints:/app/checkpoints
+
+    ports:
+      - "8000:8000"
+
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload

@@ -1,0 +1,12 @@
+-r requirements.txt
+
+# Jupyter Development
+jupyterlab
+notebook
+ipykernel
+
+# Optional development tools
+pytest
+black
+isort
+flake8
