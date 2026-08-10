@@ -207,7 +207,7 @@ The application has been containerized using **Docker** to provide a reproducibl
 The project includes:
 
 - `Dockerfile` — Defines the Python environment and application image
-- `docker-compose.yml` — Defines and manages the application services
+- `compose.dev.yaml` — Defines and manages the application services
 - Dockerized model training
 - Dockerized MLflow
 - Dockerized FastAPI application
