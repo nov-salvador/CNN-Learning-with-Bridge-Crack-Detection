@@ -1,5 +1,6 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from PIL import Image
 from io import BytesIO
@@ -16,6 +17,13 @@ app = FastAPI(
   title="Bridge Crack Detection API",
   description="CNN model for detecting bridge cracks",
   version="1.0.0"
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.state.model = load_model()
