@@ -1,0 +1,318 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  color: #1f2937;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 60px 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0f172a, #1e3a5f);
+  color: white;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+}
+
+header h1 {
+  margin: 0 0 12px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+header p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 1.05rem;
+}
+
+main {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Upload section */
+
+.upload-box {
+  background: white;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+}
+
+.upload-box p {
+  color: #6b7280;
+}
+
+.upload-box input {
+  margin: 15px 0;
+}
+
+/* Image preview */
+
+.image-preview {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  height: 300px;
+  object-fit: contain;
+  margin: 20px auto;
+  border-radius: 8px;
+}
+
+/* Predict button */
+
+main > button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 20px;
+
+  background: #2563eb;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+main > button:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+main > button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+main > button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+.error-message {
+  margin-top: 15px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+
+/* Result */
+
+.result {
+  margin-top: 30px;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.result h2 {
+  margin-top: 0;
+}
+.result h3 {
+  margin: 20px 0 10px;
+}
+.result .confidence {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.result p:last-child {
+  color: #6b7280;
+}
+
+.result.crack {
+  border: 2px solid #dc2626;
+}
+
+.result.no-crack {
+  border: 2px solid #16a34a;
+}
+
+/* Model info */
+.model-info {
+  margin-top: 40px;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.model-info h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.model-info > p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.model-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.model-details div {
+  padding: 15px;
+  border-radius: 8px;
+  background: #f5f7fa;
+}
+
+.model-details span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.model-details strong {
+  font-size: 1rem;
+}
+
+.model-note {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+
+/* Responsive Design */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .app {
+    padding: 40px 16px;
+  }
+
+  header {
+    padding: 35px 20px;
+    margin-bottom: 30px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  main {
+    max-width: 100%;
+  }
+
+  .upload-box {
+    padding: 25px 20px;
+  }
+
+  .image-preview {
+    height: 280px;
+  }
+
+  .model-info {
+    padding: 25px 20px;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 480px) {
+  .app {
+    padding: 20px 12px;
+  }
+
+  header {
+    padding: 30px 15px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+  }
+
+  header h1 {
+    font-size: 1.7rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .upload-box {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  .upload-box input {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .image-preview {
+    height: 220px;
+    margin: 15px auto;
+  }
+
+  main > button {
+    padding: 13px 16px;
+    font-size: 0.95rem;
+  }
+
+  .result {
+    padding: 20px 15px;
+  }
+
+  .result h2 {
+    font-size: 1.3rem;
+  }
+
+  .result h3 {
+    font-size: 1.1rem;
+  }
+
+  .result .confidence {
+    font-size: 1.7rem;
+  }
+
+  .model-info {
+    margin-top: 30px;
+    padding: 20px 15px;
+  }
+
+  .model-info h2 {
+    font-size: 1.3rem;
+  }
+
+  .model-details {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .model-details div {
+    padding: 12px;
+  }
+}
