@@ -26,7 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.state.model = load_model()
+app.state.model = load_model(isTraining=False)
 app.include_router(predict_router)
 app.include_router(health_router)
 
