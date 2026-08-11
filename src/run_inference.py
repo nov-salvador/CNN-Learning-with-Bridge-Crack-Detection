@@ -10,7 +10,7 @@ from src.inference.predictor import predict_image
 from src.inference.model_loader import load_model
 
 def main():
-  model = load_model()
+  model = load_model(isTraining=False)
 
   image_path = SAMPLE_DIR_5
   image = Image.open(image_path)

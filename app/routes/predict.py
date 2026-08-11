@@ -16,12 +16,19 @@ router = APIRouter()
 async def predict(request: Request, file: UploadFile = File(...)):
   if file.content_type not in ["image/jpeg", "image/png", "image/jpg"]:
     raise HTTPException(status_code=400, detail="Only JPEG, JPG and PNG images are supported.")
-  
+  MAX_DIMENSION = 4000
   try:
     contents = await file.read()
     image = Image.open(BytesIO(contents))
+    image.load()
   except Exception:
     raise HTTPException(status_code=400, detail="Invalid image file.")
+  
+  if max(image.size) > MAX_DIMENSION:
+    raise HTTPException(
+      status_code=400,
+      detail="Image dimensions are too large."
+    )
 
   model = request.app.state.model
   
@@ -30,6 +37,9 @@ async def predict(request: Request, file: UploadFile = File(...)):
     image=image,
     class_names=CLASS_NAMES
   )
+
+  del image
+  del contents
 
   return{
       "prediction": result['prediction'],

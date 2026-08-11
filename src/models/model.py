@@ -3,9 +3,11 @@ import torch.nn as nn
 
 from configs.config import NUM_CLASSES
 
-def get_model():
-  model = resnet18(weights=ResNet18_Weights.DEFAULT)
-
+def get_model(isTraining):
+  if isTraining:
+    model = resnet18(weights=ResNet18_Weights.DEFAULT)
+  else:
+    model = resnet18(weights=None)
   for params in model.layer1.parameters():
     params.requires_grad = False
     
