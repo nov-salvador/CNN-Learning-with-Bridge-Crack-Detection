@@ -54,6 +54,9 @@ const compressImage = (file, maxDimension = 1024, quality = 0.8) => {
   })
 }
 export const predictImage = async (file) => {
+  if (!["image/jpeg", "image/png", "image/jpg"].includes(file.type)) {
+   throw new Error("Only JPEG, JPG and PNG images are supported.")
+  }
   console.log("Original:", file.size)
   const compressedImage = await compressImage(file)
   console.log("Compressed:", compressedImage.size)
