@@ -1,0 +1,12 @@
+ # Deep Learning
+torch==2.13.0
+torchvision==0.28.0
+
+# Data Processing
+numpy==2.5.1
+Pillow==12.3.0
+
+# API
+fastapi==0.141.1
+uvicorn==0.52.0
+python-multipart==0.0.32

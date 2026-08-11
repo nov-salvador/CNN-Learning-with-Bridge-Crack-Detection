@@ -23,7 +23,7 @@ runs/
 
 # Outputs
 outputs/
-checkpoints/
+**/last_checkpoint.pth
 
 # Dataset
 data/
