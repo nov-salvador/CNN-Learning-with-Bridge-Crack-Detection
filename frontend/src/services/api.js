@@ -6,18 +6,21 @@ const compressImage = (file, maxDimension = 1024, quality = 0.8) => {
     const objectUrl = URL.createObjectURL(file)
 
     image.onload = () => {
+      if (image.width <= maxDimension && image.height <= maxDimension) {
+        URL.revokeObjectURL(objectUrl)
+        resolve(file)
+        return
+      }
       let { width, height } = image
 
-      // Keep the original aspect ratio
-      if (width > maxDimension || height > maxDimension) {
-        if (width > height) {
-          height = Math.round((height / width) * maxDimension)
-          width = maxDimension
-        } else {
-          width = Math.round((width / height) * maxDimension)
-          height = maxDimension
-        }
+      if (width > height) {
+        height = Math.round((height / width) * maxDimension)
+        width = maxDimension
+      } else {
+        width = Math.round((width / height) * maxDimension)
+        height = maxDimension
       }
+      
 
       const canvas = document.createElement("canvas")
       canvas.width = width
@@ -51,7 +54,9 @@ const compressImage = (file, maxDimension = 1024, quality = 0.8) => {
   })
 }
 export const predictImage = async (file) => {
+  console.log("Original:", file.size)
   const compressedImage = await compressImage(file)
+  console.log("Compressed:", compressedImage.size)
   const formData = new FormData()
   formData.append("file", compressedImage, "compressed-image.jpg")
   const response = await fetch(`${API_URL}/predict`, {method: "post", body: formData})
