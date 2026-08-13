@@ -18,9 +18,10 @@ This repository documents my journey of learning **Deep Learning** and **Machine
 - ✅ Image inference pipeline
 - ✅ REST API built with **FastAPI**
 - ✅ **Docker containerization**
+- ✅ End-to-end web application
+- ✅ Frontend deployment with **Netlify**
 - 🚧 GitHub Actions (CI/CD) *(Planned)*
 - 🚧 Cloud deployment *(Planned)*
-- 🚧 React web application *(Planned)*
 
 ---
 
@@ -85,10 +86,22 @@ The goal is not only to build an accurate classifier but also to gain practical 
 - Uvicorn
 - Pydantic
 
+### Frontend
+
+- React
+- Vite
+- JavaScript
+- CSS
+
 ### Containerization
 
 - Docker
 - Docker Compose
+
+### Deployment
+
+- Netlify
+- Render
 
 ### Development Tools
 
@@ -129,6 +142,7 @@ CNN-Learning-with-Bridge-Crack-Detection/
 ├── logs/                       # Training logs and TensorBoard files
 ├── outputs/                    # Generated outputs
 ├── mlruns/                     # Mlflow artifacts 
+├── frontend/                   # React frontend application
 │
 ├── mlflow.db
 ├── compose.yaml
