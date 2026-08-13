@@ -251,16 +251,17 @@ docker compose -f compose.dev.yaml up --build
 - Image Inference Pipeline
 - FastAPI REST API
 - Docker Containerization
+- React Frontend
+- End-to-End Web Application
 
 ### 🚧 In Progress
 
-- React Frontend
+- GitHub Actions (CI/CD)
+
 
 ### 📅 Planned
-
-- GitHub Actions (CI/CD)
 - Cloud Deployment
-- End-to-End Web Application
+
 
 ---
 
